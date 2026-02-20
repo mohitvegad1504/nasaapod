@@ -3,10 +3,10 @@ import XCTest
 
 // MARK: - Mock APOD Service
 final class MockAPODService: APODServiceProtocol {
-    var modelToReturn: APODModel?
+    var modelToReturn: APODDTO?
     var errorToThrow: Error?
 
-    func fetchAPOD(for date: String?) async throws -> APODModel {
+    func fetchAPOD(for date: String?) async throws -> APODDTO {
         if let error = errorToThrow { throw error }
         if let model = modelToReturn { return model }
         throw NSError(domain: "No mock set", code: 0)
@@ -31,7 +31,7 @@ final class APODRepositoryTests: XCTestCase {
 
     // MARK: - Test 1: Fetch succeeds
     func test_fetchAPOD_succeeds() async throws {
-        let model = APODModel.mock(title: "From Network")
+        let model = APODDTO.mock(title: "From Network")
         mockService.modelToReturn = model
 
         let result = try await repository.fetchAPOD(for: "2026-02-07")

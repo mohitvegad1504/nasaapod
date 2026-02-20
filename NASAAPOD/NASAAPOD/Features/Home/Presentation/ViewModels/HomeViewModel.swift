@@ -11,17 +11,15 @@ enum ViewState<Value> {
 @MainActor
 final class HomeViewModel: ObservableObject {
     
-    @Published var state: ViewState<APODModel> = .idle
+    @Published var state: ViewState<APODDTO> = .idle
     private var loadTask: Task<Void, Never>?
     
-    
-    private let repository: any APODRepositoryProtocol
+    private let repository: APODRepositoryProtocol
     
     // MARK: - Initialization
-    init(repository: any APODRepositoryProtocol) {
+    init(repository: APODRepositoryProtocol) {
         self.repository = repository
     }
-    
     
     // MARK: - Public Method
     

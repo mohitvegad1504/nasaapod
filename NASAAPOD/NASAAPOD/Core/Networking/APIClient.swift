@@ -5,7 +5,7 @@ final class APIClient: APIClientProtocol {
     
     private let session: URLSession
     
-    init(session: URLSession = .shared) {
+    init(session: URLSession = SSLPinningManager.shared.session) {
         self.session = session
     }
     

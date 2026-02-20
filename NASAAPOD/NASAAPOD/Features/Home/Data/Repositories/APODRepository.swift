@@ -11,13 +11,13 @@ final class APODRepository: APODRepositoryProtocol {
         self.fileStorage = fileStorage
     }
     
-    func fetchAPOD(for date: String? = nil) async throws -> APODModel {
+    func fetchAPOD(for date: String? = nil) async throws -> APODDTO {
         do {
             let response = try await service.fetchAPOD(for: date)
             try? fileStorage.saveLatest(response, fileName: cacheFileName)
             return response
         } catch {
-            if let cachedModel: APODModel = try? fileStorage.loadLatest(APODModel.self, fileName: cacheFileName) {
+            if let cachedModel: APODDTO = try? fileStorage.loadLatest(APODDTO.self, fileName: cacheFileName) {
                 return cachedModel
             } else {
                 throw error

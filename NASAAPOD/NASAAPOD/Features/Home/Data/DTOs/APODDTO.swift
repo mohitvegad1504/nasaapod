@@ -1,6 +1,6 @@
 import Foundation
 
-struct APODModel: Codable, Equatable {
+struct APODDTO: Codable, Equatable {
     let date: Date
     let title: String
     let explanation: String
@@ -38,3 +38,12 @@ struct APODModel: Codable, Equatable {
        }
 }
 
+extension APODDTO {
+    init(date: Date, title: String, explanation: String, url: String, mediaType: String) {
+        self.date = date
+        self.title = title
+        self.explanation = explanation
+        self.url = url
+        self.mediaType = mediaType
+    }
+}
